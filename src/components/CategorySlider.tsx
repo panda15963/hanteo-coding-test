@@ -35,7 +35,7 @@ export default function Home() {
         const timer = setTimeout(() => {
             setItems((prev) => [...prev, ...generateItems(prev.length, 10)]);
             setIsFetching(false);
-        }, 1000); // 로딩 시뮬레이션
+        }, 1000);
 
         return () => clearTimeout(timer);
     }, [isFetching]);

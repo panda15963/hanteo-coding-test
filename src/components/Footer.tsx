@@ -6,7 +6,7 @@ export function Footer() {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth', // 부드럽게 이동
+      behavior: 'smooth',
     });
   };
 

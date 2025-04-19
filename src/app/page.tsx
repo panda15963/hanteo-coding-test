@@ -7,14 +7,14 @@ import { Footer } from '@/components/Footer';
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen bg-gray-100">
+    <div className="flex flex-col min-h-screen bg-gray-200">
       {/* 탭 메뉴 */}
       <div className="sticky top-0 bg-white z-10 h-12">
         <Tabs />
       </div>
 
       {/* 배너 슬라이더 */}
-      <div className="bg-white mt-12"> {/* ← Tabs 높이만큼 마진 줌 */}
+      <div className="mt-12">
         <BannerSlider />
       </div>
 

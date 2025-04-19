@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Dialog, DialogPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
+import classNames from 'classnames'
 
 const navigation = [
     { name: '차트', href: '#' },
@@ -16,9 +17,10 @@ const navigation = [
 
 export default function Tabs() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+    const [selectedTab, setSelectedTab] = useState<string>('차트')
 
     return (
-        <header className="bg-white border-b border-gray-300 fixed top-0 left-0 right-0">
+        <header className="bg-[#FFD1D8] border-b border-[#FFD1D8] fixed top-0 left-0 right-0 z-50">
             {/* 모바일용 햄버거 메뉴 버튼 */}
             <div className="flex justify-end items-center p-6 lg:hidden">
                 <button
@@ -38,7 +40,15 @@ export default function Tabs() {
             >
                 <div className="flex gap-x-12">
                     {navigation.map((item) => (
-                        <Link key={item.name} href={item.href} className="text-sm font-semibold text-black">
+                        <Link
+                            key={item.name}
+                            href={item.href}
+                            onClick={() => setSelectedTab(item.name)}
+                            className={classNames(
+                                'text-sm font-semibold',
+                                selectedTab === item.name ? 'text-white' : 'text-black'
+                            )}
+                        >
                             {item.name}
                         </Link>
                     ))}
@@ -48,12 +58,12 @@ export default function Tabs() {
             {/* 모바일 메뉴 (슬라이드 패널) */}
             <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
                 <div className="fixed inset-0 z-10" />
-                <DialogPanel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+                <DialogPanel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-[#FFD1D8] px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
                     <div className="flex items-center justify-between">
                         <button
                             type="button"
                             onClick={() => setMobileMenuOpen(false)}
-                            className="-m-2.5 rounded-md p-2.5 text-gray-700"
+                            className="-m-2.5 rounded-md p-2.5 text-black"
                         >
                             <span className="sr-only">Close menu</span>
                             <XMarkIcon aria-hidden="true" className="size-6" />
@@ -66,7 +76,14 @@ export default function Tabs() {
                                     <Link
                                         key={item.name}
                                         href={item.href}
-                                        className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-50"
+                                        onClick={() => {
+                                            setSelectedTab(item.name)
+                                            setMobileMenuOpen(false)
+                                        }}
+                                        className={classNames(
+                                            '-mx-3 block rounded-lg px-3 py-2 text-base font-semibold',
+                                            selectedTab === item.name ? 'text-white' : 'text-black'
+                                        )}
                                     >
                                         {item.name}
                                     </Link>
